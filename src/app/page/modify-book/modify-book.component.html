@@ -1,0 +1,228 @@
+<div class="row">
+    <div class="col">
+        <h2 id="titlePage">Book</h2>
+    </div>
+</div>
+<div class="row mt-2">
+    <div class="col-lg-10 col-sm-12">
+        <form id="bookForm">
+            <div class="form-group row">
+                <label for="bookTitle" class="col-sm-2 col-form-label">Title</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="bookTitle">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="description" class="col-sm-2 col-form-label">Description</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="description">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" id="isbn">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rating" class="col-sm-2 col-form-label">Rating</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="rating">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="rentalCost" class="col-sm-2 col-form-label">Rental Cost</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="rentalCost">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="replacementCost" class="col-sm-2 col-form-label">Replacement Cost</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="replacementCost">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="year" class="col-sm-2 col-form-label">Year</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="year">
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="languageSelect" class="col-sm-2 col-form-label">Language</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="languageSelect">
+                        <option selected disabled value="">Choose Language</option>
+                    </select>
+                </div>
+                <div class="col-sm-10 offset-2 my-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                        data-target="#addLanguageModal">
+                        <i class="fal fa-plus-circle"></i> Add Language
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="publisherSelect" class="col-sm-2 col-form-label">Publisher</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="publisherSelect">
+                        <option selected disabled value="">Choose Publisher</option>
+                    </select>
+                </div>
+                <div class="col-sm-10 offset-2 my-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                        data-target="#addPublisherModal">
+                        <i class="fal fa-plus-circle"></i> Add Publisher
+                    </button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="categorySelect" class="col-sm-2 col-form-label">Categories</label>
+                <div class="col-sm-10">
+                    <select class="form-control" id="categorySelect">
+                        <option selected disabled value="">Choose Categories</option>
+                    </select>
+                </div>
+                <div class="col-sm-10 offset-2 my-2">
+                    <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
+                        data-target="#addCategoryModal">
+                        <i class="fal fa-plus-circle"></i> Add category
+                    </button>
+                </div>
+            </div>
+            <div class="form-group" id="authors">
+                <div class="row">
+                    <label class="col-sm-2 col-form-label">Authors</label>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="authorFirstName" placeholder="First Name">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-10 offset-2 my-2">
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="btnAddAuthor">
+                            <i class="fal fa-plus-circle"></i> Add Author
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="stock" class="col-sm-2 col-form-label">Stock</label>
+                <div class="col-sm-10">
+                    <input type="number" class="form-control" id="stock">
+                </div>
+            </div>
+            <fieldset class="form-group">
+                <div class="row">
+                    <legend class="col-form-label col-sm-2 pt-0">Status</legend>
+                    <div class="col-sm-10">
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="availableRadio"
+                                value="option1" checked>
+                            <label class="form-check-label" for="availableRadio">
+                                Available
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
+                                value="option2">
+                            <label class="form-check-label" for="gridRadios2">
+                                Borrowed
+                            </label>
+                        </div>
+                    </div>
+                </div>
+            </fieldset>
+            <button type="submit" class="btn btn-primary float-right">Submit</button>
+        </form>
+    </div>
+</div>
+<!-- add language modal -->
+<div class="modal fade" id="addLanguageModal" tabindex="-1" aria-labelledby="addLanguage" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addLanguage">New Language</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="languageCode" class="col-form-label">Code:</label>
+                        <input type="text" class="form-control" id="languageCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="languageName" class="col-form-label">Language Name:</label>
+                        <input type="text" class="form-control" id="languageName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add publisher modal -->
+<div class="modal fade" id="addPublisherModal" tabindex="-1" aria-labelledby="addPublisher" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addPublisher">New Publisher</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="publisherCode" class="col-form-label">Code:</label>
+                        <input type="text" class="form-control" id="languageCode">
+                    </div>
+                    <div class="form-group">
+                        <label for="publisherName" class="col-form-label">Publisher Name:</label>
+                        <input type="text" class="form-control" id="publisherName">
+                    </div>
+                    <div class="form-group">
+                        <label for="publisherCity" class="col-form-label">Publisher City:</label>
+                        <input type="text" class="form-control" id="publisherCity">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- add category modal -->
+<div class="modal fade" id="addCategoryModal" tabindex="-1" aria-labelledby="addCategory" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="addCategory">New Category</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form>
+                    <div class="form-group">
+                        <label for="categoryName" class="col-form-label">Category Name:</label>
+                        <input type="text" class="form-control" id="publisherName">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Add</button>
+            </div>
+        </div>
+    </div>
+</div>
