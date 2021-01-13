@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { User } from 'src/app/model/user';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -10,8 +11,16 @@ import { AuthService } from 'src/app/service/auth.service';
 export class AdminComponent implements OnInit {
   constructor(private router: Router, private authService: AuthService) {}
 
+  public username: string;
+
   ngOnInit(): void {
+    this.setUsername();
     this.setActiveMenus();
+  }
+
+  private setUsername(): void {
+    const user: User = this.authService.getUser();
+    this.username = user.username;
   }
 
   private setActiveMenus(): void {

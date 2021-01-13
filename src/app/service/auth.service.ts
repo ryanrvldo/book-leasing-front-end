@@ -21,7 +21,7 @@ export class AuthService {
     localStorage.removeItem('user');
   }
 
-  saveProfile(user: User): void {
+  saveUser(user: User): void {
     const data = JSON.stringify(user);
     localStorage.setItem('user', data);
   }

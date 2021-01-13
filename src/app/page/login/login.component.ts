@@ -20,15 +20,12 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  /**
-   * login
-   */
   public login(): void {
     this.userService.login(this.user).subscribe((value) => {
       if (value.token) {
         this.authService.saveToken(value.token);
-        this.authService.saveProfile(value.user);
-        this.router.navigateByUrl('/transaction');
+        this.authService.saveUser(value.user);
+        this.router.navigateByUrl('/dashboard');
       }
     });
   }

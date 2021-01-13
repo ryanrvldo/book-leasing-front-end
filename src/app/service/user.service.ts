@@ -1,22 +1,22 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Constants } from '../constants/constants';
 import { Observable } from 'rxjs';
 import { User } from '../model/user';
+import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class UserService {
-  constructor(private http: HttpClient) {}
-
-  login(user: User): Observable<any> {
-    return this.http.post(`${Constants.BASE_URL}authentication`, user);
+export class UserService extends BaseService {
+  constructor(protected http: HttpClient) {
+    super(http);
   }
 
-  getUser(token: string): Observable<Object> {
-    return this.http.get(`${Constants.BASE_URL}user/admin`, {
-      headers: { Authorization: `Bearer ${token}` },
-    });
+  login(user: User): Observable<any> {
+    return this.postMethod('authentication', user);
+  }
+
+  getAllUser(): Observable<any> {
+    return this.getMethod('users');
   }
 }

@@ -1,58 +1,89 @@
-<div class="row">
+<article class="row">
     <div class="col">
         <h2 id="titlePage">Add Transaction</h2>
     </div>
-</div>
-<div class="row mt-2">
+</article>
+<article class="row mt-2">
     <div class="col-lg-10 col-sm-12">
-        <form id="transactionForm">
+        <div id="transactionForm">
             <div class="form-group row">
                 <label for="bookSelect" class="col-sm-2 col-form-label">Book</label>
                 <div class="col-sm-10">
-                    <select class="form-control" id="bookSelect">
-                        <option selected disabled value="">Choose Book</option>
+                    <select class="form-control" [(ngModel)]="inventorySelected">
+                        <option selected disabled>Choose Book</option>
+                        <option *ngFor="let inventory of inventories" [value]="inventory.id"
+                            [selected]="inventory.id === inventorySelected">{{inventory.book.title}}</option>
                     </select>
                 </div>
             </div>
             <div class="form-group row">
                 <label for="rentalDays" class="col-sm-2 col-form-label">Rental Days</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rentalDays">
+                    <input type="number" class="form-control" [(ngModel)]="rentalDays">
                 </div>
             </div>
             <div class="form-group row no-gutters">
                 <div class="col-sm-2 offset-sm-10">
-                    <button id="btnAddBook" type="button" class="btn btn-sm btn-outline-primary">
+                    <button type="button" class="btn btn-sm btn-outline-primary float-right" (click)="addCartItem()">
                         <i class="fal fa-plus-circle"></i> Add Book
                     </button>
                 </div>
             </div>
+
+            <table class="table table-hover table-responsive my-5 py-3 container justify-content-center"
+                *ngIf="carts.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Cost</th>
+                        <th scope="col">Rental Days</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let cart of carts; index as i;">
+                    <tr class="text-center">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{cart.book.title}}</td>
+                        <td>{{cart.book.isbn}}</td>
+                        <td>{{cart.book.rentalCost}}</td>
+                        <td>{{cart.rentalDays}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" (click)="removeCartItem(i)">
+                                <i class="fal fa-trash-alt fa-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+
             <h5>Customer</h5>
             <div class="form-group row">
                 <label for="fullName" class="col-sm-2 col-form-label">Full Name</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="fullName">
+                    <input type="text" class="form-control" [(ngModel)]="profile.fullName">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="email" class="col-sm-2 col-form-label">Email</label>
                 <div class="col-sm-10">
-                    <input type="email" class="form-control" id="email">
+                    <input type="email" class="form-control" [(ngModel)]="profile.email">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="phone" class="col-sm-2 col-form-label">Phone</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="phone">
+                    <input type="text" class="form-control" [(ngModel)]="profile.phone">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="address" class="col-sm-2 col-form-label">Address</label>
                 <div class="col-sm-10">
-                    <textarea type="text" class="form-control" id="address"></textarea>
+                    <textarea type="text" class="form-control" [(ngModel)]="profile.address"></textarea>
                 </div>
             </div>
-            <button type="submit" class="btn btn-primary float-right">Submit</button>
-        </form>
+            <button type="button" class="btn btn-primary float-right" (click)="submitTransaction()">Submit</button>
+        </div>
     </div>
-</div>
+</article>
