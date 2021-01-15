@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from 'src/app/data/data-source';
 import { User } from 'src/app/model/user';
+import { AuthService } from 'src/app/service/auth.service';
 import { UserService } from 'src/app/service/user.service';
 
 @Component({
@@ -9,11 +10,16 @@ import { UserService } from 'src/app/service/user.service';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  constructor(private userService: UserService) {}
+  constructor(
+    private userService: UserService,
+    private authService: AuthService
+  ) {}
 
   public users: User[];
+  isAdmin: boolean;
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdminRole();
     this.setUserListTable();
   }
 

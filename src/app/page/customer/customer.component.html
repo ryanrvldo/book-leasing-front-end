@@ -3,11 +3,40 @@
         <h2>Customer</h2>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-primary float-right" routerLink="['/customer/add']"
-            routerLinkActive="active">
+        <button type="button" class="btn btn-primary float-right" [routerLink]="['/customer/add']">
             <i class="fal fa-plus-circle"></i>
             Add
         </button>
     </div>
 </div>
-<table id="customerList" class="table table-hover table-responsive my-3"></table>
+<table id="customerList" class="table table-hover table-responsive my-3">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">No.</th>
+            <th scope="col">Full Name</th>
+            <th scope="col">Email</th>
+            <th scope="col">Phone</th>
+            <th scope="col">Address</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr class="text-center" *ngFor="let customer of customers; index as idx">
+            <th scope="row">{{idx + 1}}</th>
+            <td>{{customer.profile.fullName}}</td>
+            <td>{{customer.profile.email}}</td>
+            <td>{{customer.profile.phone}}</td>
+            <td>{{customer.profile.address}}</td>
+            <td>
+                <a title="Edit" class="text-decoration-none" [routerLink]="['/customer/edit']"
+                    routerLinkActive="router-link-active">
+                    <i class="fal fa-edit fa-lg p-2"></i>
+                </a>
+                <a title="Remove" class="text-decoration-none">
+                    <i class="fal fa-trash-alt fa-lg p-2"></i>
+                </a>
+
+            </td>
+        </tr>
+    </tbody>
+</table>

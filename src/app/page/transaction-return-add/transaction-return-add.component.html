@@ -44,11 +44,11 @@
                     </tr>
                 </thead>
                 <tbody *ngFor="let cart of carts; index as i;">
-                    <tr class="">
+                    <tr>
                         <th scope="row">{{i+1}}</th>
                         <td>{{cart.book.title}}</td>
                         <td>{{cart.book.isbn}}</td>
-                        <td>{{cart.book.rentalCost | currency:"IDR":"symbol":"4.2-2"}}</td>
+                        <td>{{cart.book.rentalCost | currency:"IDR":"symbol"}}</td>
                         <td>{{cart.rentalDate | date:"d MMMM y (h:mm:ss a)"}}</td>
                         <td>{{cart.returnDate | date:"d MMMM y (h:mm:ss a)"}}</td>
                         <td>{{cart.totalCost | currency:"IDR":"symbol"}}</td>

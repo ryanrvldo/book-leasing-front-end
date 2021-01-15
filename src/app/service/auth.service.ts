@@ -30,4 +30,12 @@ export class AuthService {
     const data = JSON.parse(localStorage.getItem('user'));
     return data;
   }
+
+  isAdminRole(): boolean {
+    const user = this.getUser();
+    if (!user) {
+      return false;
+    }
+    return user.role && user.role.code === 'ADM';
+  }
 }

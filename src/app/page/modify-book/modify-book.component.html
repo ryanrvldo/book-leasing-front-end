@@ -9,50 +9,52 @@
             <div class="form-group row">
                 <label for="bookTitle" class="col-sm-2 col-form-label">Title</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="bookTitle">
+                    <input type="text" class="form-control" id="bookTitle" [(ngModel)]="book.title">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="description" class="col-sm-2 col-form-label">Description</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="description">
+                    <input type="text" class="form-control" id="description" [(ngModel)]="book.description">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="isbn" class="col-sm-2 col-form-label">ISBN</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="isbn">
+                    <input type="text" class="form-control" id="isbn" [(ngModel)]="book.isbn">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="rating" class="col-sm-2 col-form-label">Rating</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rating">
+                    <input type="number" class="form-control" id="rating" [(ngModel)]="book.rating">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="rentalCost" class="col-sm-2 col-form-label">Rental Cost</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="rentalCost">
+                    <input type="number" class="form-control" id="rentalCost" [(ngModel)]="book.rentalCost">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="replacementCost" class="col-sm-2 col-form-label">Replacement Cost</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="replacementCost">
+                    <input type="number" class="form-control" id="replacementCost" [(ngModel)]="book.replacementCost">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="year" class="col-sm-2 col-form-label">Year</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="year">
+                    <input type="number" class="form-control" id="year" [(ngModel)]="book.publicationYear">
                 </div>
             </div>
             <div class="form-group row">
                 <label for="languageSelect" class="col-sm-2 col-form-label">Language</label>
                 <div class="col-sm-10">
-                    <select class="form-control" id="languageSelect">
-                        <option selected disabled value="">Choose Language</option>
+                    <select class="form-control" [(ngModel)]="selectedLanguage">
+                        <option disabled>Choose Language</option>
+                        <option *ngFor="let lang of languages" [value]="lang.code"
+                            [selected]="lang.code === selectedLanguage">{{lang.name}}</option>
                     </select>
                 </div>
                 <div class="col-sm-10 offset-2 my-2">
@@ -65,8 +67,10 @@
             <div class="form-group row">
                 <label for="publisherSelect" class="col-sm-2 col-form-label">Publisher</label>
                 <div class="col-sm-10">
-                    <select class="form-control" id="publisherSelect">
-                        <option selected disabled value="">Choose Publisher</option>
+                    <select class="form-control" [(ngModel)]="selectedPublisher">
+                        <option disabled>Choose Publisher</option>
+                        <option *ngFor="let publisher of publishers" [value]="publisher.code"
+                            [selected]="publisher.code === selectedPublisher">{{publisher.name}}</option>
                     </select>
                 </div>
                 <div class="col-sm-10 offset-2 my-2">
@@ -78,11 +82,20 @@
             </div>
             <div class="form-group row">
                 <label for="categorySelect" class="col-sm-2 col-form-label">Categories</label>
-                <div class="col-sm-10">
-                    <select class="form-control" id="categorySelect">
-                        <option selected disabled value="">Choose Categories</option>
+                <div class="col-sm-10 mb-2">
+                    <select class="form-control" id="categorySelect" [(ngModel)]="selectedCategory">
+                        <option disabled>Choose Categories</option>
+                        <option *ngFor="let category of categories" [value]="category.name"
+                            [selected]="category.name === selectedCategory">{{category.name}}</option>
                     </select>
                 </div>
+                <!-- <div class="col-sm-10 offset-2 mb-2" *ngFor="let category of requestCategories">
+                    <select class="form-control" id="categorySelect" [(ngModel)]="selectedCategory">
+                        <option disabled>Choose Categories</option>
+                        <option *ngFor="let category of categories" [value]="category.name"
+                            [selected]="category.name === selectedCategory">{{category.name}}</option>
+                    </select>
+                </div> -->
                 <div class="col-sm-10 offset-2 my-2">
                     <button type="button" class="btn btn-sm btn-outline-primary" data-toggle="modal"
                         data-target="#addCategoryModal">
@@ -91,18 +104,32 @@
                 </div>
             </div>
             <div class="form-group" id="authors">
-                <div class="row">
-                    <label class="col-sm-2 col-form-label">Authors</label>
+                <div class="row mb-2">
+                    <label class=" col-sm-2 col-form-label">Authors</label>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="authorFirstName" placeholder="First Name">
+                        <input type="text" class="form-control" id="authorFirstName" placeholder="First Name"
+                            [(ngModel)]="author.firstName">
                     </div>
                     <div class="col-sm-5">
-                        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name">
+                        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name"
+                            [(ngModel)]="author.lastName">
+                    </div>
+                </div>
+                <div class="row mb-2" *ngFor="let author of authors">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="authorFirstName" placeholder="First Name"
+                            [(ngModel)]="author.firstName">
+                    </div>
+                    <div class="col-sm-5">
+                        <input type="text" class="form-control" id="authorLastName" placeholder="Last Name"
+                            [(ngModel)]="author.lastName">
                     </div>
                 </div>
                 <div class="row">
                     <div class="col-sm-10 offset-2 my-2">
-                        <button type="button" class="btn btn-sm btn-outline-primary" id="btnAddAuthor">
+                        <button type="button" class="btn btn-sm btn-outline-primary" id="btnAddAuthor"
+                            (click)="addAuthorList()">
                             <i class="fal fa-plus-circle"></i> Add Author
                         </button>
                     </div>
@@ -111,31 +138,24 @@
             <div class="form-group row">
                 <label for="stock" class="col-sm-2 col-form-label">Stock</label>
                 <div class="col-sm-10">
-                    <input type="number" class="form-control" id="stock">
+                    <input type="number" class="form-control" id="stock" [(ngModel)]="bookRequest.stock">
                 </div>
             </div>
             <fieldset class="form-group">
                 <div class="row">
                     <legend class="col-form-label col-sm-2 pt-0">Status</legend>
-                    <div class="col-sm-10">
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="availableRadio"
-                                value="option1" checked>
-                            <label class="form-check-label" for="availableRadio">
-                                Available
-                            </label>
-                        </div>
-                        <div class="form-check">
-                            <input class="form-check-input" type="radio" name="gridRadios" id="gridRadios2"
-                                value="option2">
-                            <label class="form-check-label" for="gridRadios2">
-                                Borrowed
+                    <div class="col-sm-10" [(ngModel)]="selectedStatus">
+                        <div class="form-check" *ngFor="let status of statusList">
+                            <input class="form-check-input" type="radio" name="gridRadios" id="{{status.code}}Radio"
+                                [value]="status.code" [checked]="status.code === selectedStatus">
+                            <label class="form-check-label" for="{{status.code}}Radio">
+                                {{status.name}}
                             </label>
                         </div>
                     </div>
                 </div>
             </fieldset>
-            <button type="submit" class="btn btn-primary float-right" (click)="addBook()">Submit</button>
+            <button type="button" class="btn btn-primary float-right" (click)="addBook()">Submit</button>
         </div>
     </div>
 </div>
@@ -150,20 +170,19 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="languageCode" class="col-form-label">Code:</label>
-                        <input type="text" class="form-control" id="languageCode">
-                    </div>
-                    <div class="form-group">
-                        <label for="languageName" class="col-form-label">Language Name:</label>
-                        <input type="text" class="form-control" id="languageName">
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="languageCode" class="col-form-label">Code:</label>
+                    <input type="text" class="form-control" id="languageCode" [(ngModel)]="newLanguage.code">
+                </div>
+                <div class="form-group">
+                    <label for="languageName" class="col-form-label">Language Name:</label>
+                    <input type="text" class="form-control" id="languageName" [(ngModel)]="newLanguage.name">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="btnCloseLanguageModal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addNewLanguage()">Add</button>
             </div>
         </div>
     </div>
@@ -179,24 +198,23 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="publisherCode" class="col-form-label">Code:</label>
-                        <input type="text" class="form-control" id="languageCode">
-                    </div>
-                    <div class="form-group">
-                        <label for="publisherName" class="col-form-label">Publisher Name:</label>
-                        <input type="text" class="form-control" id="publisherName">
-                    </div>
-                    <div class="form-group">
-                        <label for="publisherCity" class="col-form-label">Publisher City:</label>
-                        <input type="text" class="form-control" id="publisherCity">
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="publisherCode" class="col-form-label">Code:</label>
+                    <input type="text" class="form-control" id="publisherCode" [(ngModel)]="newPublisher.code">
+                </div>
+                <div class="form-group">
+                    <label for="publisherName" class="col-form-label">Publisher Name:</label>
+                    <input type="text" class="form-control" id="publisherName" [(ngModel)]="newPublisher.name">
+                </div>
+                <div class="form-group">
+                    <label for="publisherCity" class="col-form-label">Publisher City:</label>
+                    <input type="text" class="form-control" id="publisherCity" [(ngModel)]="newPublisher.city">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="btnClosePublisherModal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addNewPublisher()">Add</button>
             </div>
         </div>
     </div>
@@ -212,16 +230,15 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
-                    <div class="form-group">
-                        <label for="categoryName" class="col-form-label">Category Name:</label>
-                        <input type="text" class="form-control" id="publisherName">
-                    </div>
-                </form>
+                <div class="form-group">
+                    <label for="categoryName" class="col-form-label">Category Name:</label>
+                    <input type="text" class="form-control" id="categoryName" [(ngModel)]="newCategory.name">
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Add</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"
+                    id="btnCloseCategoryModal">Close</button>
+                <button type="button" class="btn btn-primary" (click)="addNewCategory()">Add</button>
             </div>
         </div>
     </div>

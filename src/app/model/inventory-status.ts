@@ -1,4 +1,5 @@
 export class InventoryStatus {
   id: number;
-  status: string;
+  code: string;
+  name: string;
 }

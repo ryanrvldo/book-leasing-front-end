@@ -13,4 +13,10 @@ export class InventoryService {
   getAvailableInventory(): Observable<any> {
     return this.http.get(`${Constants.BASE_URL}/inventories/status/1`);
   }
+
+  getAllInventoryStatus(): Promise<any> {
+    return this.http
+      .get(`${Constants.BASE_URL}/inventories/status`)
+      .toPromise();
+  }
 }

@@ -17,4 +17,8 @@ export class UserService {
   getAllUser(): Observable<any> {
     return this.http.get(`${Constants.BASE_URL}/users`);
   }
+
+  addUser(body: User): Promise<any> {
+    return this.http.post(`${Constants.BASE_URL}/user`, body).toPromise();
+  }
 }

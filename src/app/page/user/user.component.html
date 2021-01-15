@@ -3,8 +3,7 @@
         <h2>User</h2>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-primary float-right" [routerLink]="['/user/add']"
-            routerLinkActive="router-link-active">
+        <button type="button" class="btn btn-primary float-right" [routerLink]="['/user/add']" *ngIf="isAdmin">
             <i class="fal fa-plus-circle"></i>
             Add
         </button>
@@ -36,7 +35,7 @@
                 <a href="/user/edit" title="Edit" class="text-decoration-none">
                     <i class="fal fa-edit fa-lg p-2"></i>
                 </a>
-                <a href="" title="Remove" class="text-decoration-none">
+                <a title="Remove" class="text-decoration-none">
                     <i class="fal fa-trash-alt fa-lg p-2"></i>
                 </a>
             </td>

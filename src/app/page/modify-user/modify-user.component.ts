@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { DataSource } from 'src/app/data/data-source';
+import { Profile } from 'src/app/model/profile';
+import { Role } from 'src/app/model/role';
+import { User } from 'src/app/model/user';
+import { ToastService } from 'src/app/service/toast.service';
+import { UserService } from 'src/app/service/user.service';
 
 @Component({
   selector: 'app-modify-user',
@@ -7,40 +13,46 @@ import { DataSource } from 'src/app/data/data-source';
   styleUrls: ['./modify-user.component.css'],
 })
 export class ModifyUserComponent implements OnInit {
-  constructor() {}
+  constructor(
+    private router: Router,
+    private toastService: ToastService,
+    private userService: UserService
+  ) {}
+
+  user: User = new User();
+  profile: Profile = new Profile();
+
+  roles: Role[];
+  selectedRole: string;
 
   ngOnInit(): void {
-    const titlePage = document.querySelector('#titlePage');
-    if (!titlePage) return;
-
     this.setRoleSelect();
-    if (window.location.pathname.includes('edit')) {
-      titlePage.innerHTML = 'Update User';
-      const user = DataSource.getUserById();
-      (<HTMLInputElement>document.querySelector('input#username')).value =
-        user.username;
-      (<HTMLInputElement>document.querySelector('input#fullName')).value =
-        user.profile.fullName;
-      (<HTMLInputElement>document.querySelector('input#email')).value =
-        user.profile.email;
-      (<HTMLInputElement>document.querySelector('input#phone')).value =
-        user.profile.phone;
-      (<HTMLTextAreaElement>(
-        document.querySelector('textarea#address')
-      )).innerText = user.profile.address;
-    } else {
-      titlePage.innerHTML = 'Add User';
-    }
   }
 
   private setRoleSelect() {
-    const roles = DataSource.getRoleList();
-    const roleSelect = document.querySelector('select#roles');
-    roles.forEach((role) => {
-      const optionElement = document.createElement('option');
-      optionElement.innerText = role.name;
-      optionElement.value = String(role.id);
-      roleSelect?.appendChild(optionElement);
-    });
+    this.roles = DataSource.getRoleList();
+  }
+
+  async addUser() {
+    this.user.profile = this.profile;
+    const role = this.roles.find((r) => r.code === this.selectedRole);
+    this.user.role = role;
+    try {
+      const response = await this.userService.addUser(this.user);
+      if (response.code === 201) {
+        this.toastService.emitMessage({
+          severity: 'success',
+          summary: 'Added',
+          detail: response.result,
+        });
+        this.router.navigateByUrl('/user');
+      }
+    } catch (error) {
+      this.toastService.emitMessage({
+        severity: 'error',
+        summary: 'Failed',
+        detail: error.error.message,
+      });
+    }
   }
 }

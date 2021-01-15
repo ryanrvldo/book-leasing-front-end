@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from 'src/app/data/data-source';
+import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
   selector: 'app-role',
@@ -7,9 +8,12 @@ import { DataSource } from 'src/app/data/data-source';
   styleUrls: ['./role.component.css'],
 })
 export class RoleComponent implements OnInit {
-  constructor() {}
+  constructor(private authService: AuthService) {}
+
+  isAdmin: boolean;
 
   ngOnInit(): void {
+    this.isAdmin = this.authService.isAdminRole();
     this.setRoleListTable();
   }
 
@@ -39,7 +43,7 @@ export class RoleComponent implements OnInit {
             <a href="/role/edit" title="Edit" class="text-decoration-none">
               <i class="fal fa-edit fa-lg p-2"></i>
             </a>
-            <a href="" title="Remove" class="text-decoration-none">
+            <a title="Remove" class="text-decoration-none">
               <i class="fal fa-trash-alt fa-lg p-2"></i>
             </a>
           </td>

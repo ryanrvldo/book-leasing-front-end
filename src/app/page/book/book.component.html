@@ -3,11 +3,50 @@
         <h2>Book</h2>
     </div>
     <div class="col">
-        <button type="button" class="btn btn-primary float-right" [routerLink]="['/book/add']"
-            routerLinkActive="active">
+        <button type="button" class="btn btn-primary float-right" [routerLink]="['/book/add']" routerLinkActive="active"
+            *ngIf="isAdmin">
             <i class="fal fa-plus-circle"></i>
             Add
         </button>
     </div>
 </div>
-<table id="bookList" class="table table-hover table-responsive my-3"></table>
+<table class="table table-hover table-responsive my-3">
+    <thead>
+        <tr class="text-center">
+            <th scope="col">No.</th>
+            <th scope="col">Title</th>
+            <th scope="col">ISBN</th>
+            <th scope="col">Desciption</th>
+            <th scope="col">Year</th>
+            <th scope="col">Rating</th>
+            <th scope="col">Rental Cost</th>
+            <th scope="col">Replacement Cost</th>
+            <th scope="col">Languange</th>
+            <th scope="col">Publisher</th>
+            <th scope="col">Action</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let book of books index as i">
+        <tr class="text-center">
+            <th scope="row">{{i + 1}}</th>
+            <td>{{book.title}}</td>
+            <td>{{book.isbn}}</td>
+            <td>{{book.description ? book.description : '-'}}</td>
+            <td>{{book.publicationYear}}</td>
+            <td>{{book.rating}}</td>
+            <td>{{book.rentalCost | currency:"IDR":"symbol"}}</td>
+            <td>{{book.replacementCost | currency:"IDR":"symbol"}}</td>
+            <td>{{book.language.name}}</td>
+            <td>{{book.publisher.name}}</td>
+            <td>
+                <a title="Edit" class="text-decoration-none">
+                    <i class="fal fa-edit fa-lg p-2"></i>
+                </a>
+                <a title="Remove" class="text-decoration-none">
+                    <i class="fal fa-trash-alt fa-lg p-2"></i>
+                </a>
+
+            </td>
+        </tr>
+    </tbody>
+</table>
