@@ -1,5 +1,4 @@
 import { Customer } from './customer';
-import { DetailRental } from './detail-rental';
 import { User } from './user';
 
 export class HeaderRental {

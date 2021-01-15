@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { DataSource } from 'src/app/data/data-source';
+import { ToastService } from 'src/app/service/toast.service';
 
 @Component({
   selector: 'app-modify-book',
@@ -7,7 +8,7 @@ import { DataSource } from 'src/app/data/data-source';
   styleUrls: ['./modify-book.component.css'],
 })
 export class ModifyBookComponent implements OnInit {
-  constructor() {}
+  constructor(private toastService: ToastService) {}
 
   ngOnInit(): void {
     const titlePage = document.querySelector('#titlePage');
@@ -86,6 +87,14 @@ export class ModifyBookComponent implements OnInit {
       const categoryOption = document.createElement('option');
       categoryOption.innerText = category.name;
       categorySelect.appendChild(categoryOption);
+    });
+  }
+
+  addBook(): void {
+    this.toastService.emitMessage({
+      severity: 'success',
+      summary: 'Success',
+      detail: 'TESTTTT!!!',
     });
   }
 }

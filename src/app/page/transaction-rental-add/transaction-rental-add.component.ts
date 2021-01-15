@@ -7,19 +7,21 @@ import { RentalDetailRequest } from 'src/app/model/rental-detail-request';
 import { RentalHeaderRequest } from 'src/app/model/rental-header-request';
 import { AuthService } from 'src/app/service/auth.service';
 import { InventoryService } from 'src/app/service/inventory.service';
+import { ToastService } from 'src/app/service/toast.service';
 import { TransactionService } from 'src/app/service/transaction.service';
 
 @Component({
-  selector: 'app-add-transaction',
-  templateUrl: './add-transaction.component.html',
-  styleUrls: ['./add-transaction.component.css'],
+  selector: 'app-transaction-rental-add',
+  templateUrl: './transaction-rental-add.component.html',
+  styleUrls: ['./transaction-rental-add.component.css'],
 })
-export class AddTransactionComponent implements OnInit {
+export class TransactionRentalAddComponent implements OnInit {
   constructor(
     private inventoryService: InventoryService,
     private transactionService: TransactionService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private toastService: ToastService
   ) {}
 
   inventorySelected: number;
@@ -78,7 +80,11 @@ export class AddTransactionComponent implements OnInit {
     request.items = items;
     request.userId = this.authService.getUser().id;
     this.transactionService.addRentalTransaction(request).subscribe((value) => {
-      alert(value.result);
+      this.toastService.emitMessage({
+        severity: 'success',
+        summary: 'Transaction Success',
+        detail: value.result,
+      });
       this.router.navigateByUrl('/rental');
     });
   }

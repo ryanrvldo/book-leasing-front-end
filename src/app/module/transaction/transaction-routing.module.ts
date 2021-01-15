@@ -1,26 +1,31 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { AddTransactionComponent } from 'src/app/page/add-transaction/add-transaction.component';
-import { DetailTransactionComponent } from 'src/app/page/detail-transaction/detail-transaction.component';
-import { ReturnTransactionComponent } from 'src/app/page/return-transaction/return-transaction.component';
-import { TransactionComponent } from 'src/app/page/transaction/transaction.component';
+import { TransactionReturnComponent } from 'src/app/page/transaction-return/transaction-return.component';
+import { TransactionReturnAddComponent } from 'src/app/page/transaction-return-add/transaction-return-add.component';
+import { TransactionRentalComponent } from 'src/app/page/transaction-rental/transaction-rental.component';
+import { TransactionRentalAddComponent } from 'src/app/page/transaction-rental-add/transaction-rental-add.component';
+import { TransactionRentalDetailComponent } from 'src/app/page/transaction-rental-detail/transaction-rental-detail.component';
 
 const routes: Routes = [
   {
     path: 'rental',
-    component: TransactionComponent,
+    component: TransactionRentalComponent,
   },
   {
-    path: 'rental/detail',
-    component: DetailTransactionComponent,
+    path: 'rental/detail/:receipt',
+    component: TransactionRentalDetailComponent,
   },
   {
     path: 'rental/add',
-    component: AddTransactionComponent,
+    component: TransactionRentalAddComponent,
   },
   {
     path: 'return',
-    component: ReturnTransactionComponent,
+    component: TransactionReturnComponent,
+  },
+  {
+    path: 'return/add',
+    component: TransactionReturnAddComponent,
   },
 ];
 

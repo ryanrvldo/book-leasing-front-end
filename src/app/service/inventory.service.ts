@@ -1,18 +1,16 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Constants } from '../constants/constants';
 import { AuthService } from './auth.service';
-import { BaseService } from './base.service';
 
 @Injectable({
   providedIn: 'root',
 })
-export class InventoryService extends BaseService {
-  constructor(protected http: HttpClient) {
-    super(http);
-  }
+export class InventoryService {
+  constructor(protected http: HttpClient) {}
 
   getAvailableInventory(): Observable<any> {
-    return this.getMethod('inventories/status/1');
+    return this.http.get(`${Constants.BASE_URL}/inventories/status/1`);
   }
 }

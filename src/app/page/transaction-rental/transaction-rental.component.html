@@ -2,14 +2,14 @@
     <div class="col">
         <h2>Transaction</h2>
     </div>
-    <div class="col">
+    <div class="col" *ngIf="user && user.role && user.role.code === 'CSHR'">
         <button type="button" class="btn btn-primary float-right" routerLink="/rental/add">
             <i class="fal fa-plus-circle"></i>
             Add
         </button>
     </div>
 </div>
-<table id="transactionList" class="table table-hover table-responsive my-3">
+<table class="table table-hover table-responsive my-3">
     <thead>
         <tr>
             <th scope="col">No.</th>
@@ -26,7 +26,8 @@
             <td>{{header.customer.profile.fullName}}</td>
             <td>{{header.user.username}}</td>
             <td>
-                <a href="/rental/detail" title="View Details" class="text-decoration-none">
+                <a href="#" title="View Details" class="text-decoration-none"
+                    [routerLink]="['/rental/detail', header.receipt]">
                     <i class="fal fa-info-circle fa-lg p-2"></i>
                 </a>
             </td>

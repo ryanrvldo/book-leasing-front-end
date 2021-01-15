@@ -1,0 +1,67 @@
+<article class="row">
+    <div class="col">
+        <h2 id="titlePage">Add Return Transaction</h2>
+    </div>
+</article>
+<article class="row mt-2">
+    <div class="col-lg-10 col-sm-12">
+        <div id="transactionForm">
+            <div class="form-group row">
+                <label for="receipt" class="col-sm-2 col-form-label">Receipt Number</label>
+                <div class="col-sm-9">
+                    <input type="text" class="form-control" id="receipt" [(ngModel)]="receiptNumber">
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-outline-success" (click)="checkBorrowedBooks()">Check</button>
+                </div>
+            </div>
+            <div class="form-group row mt-2" *ngIf="result">
+                <label for="bookSelect" class="col-sm-2 col-form-label">Book</label>
+                <div class="col-sm-9">
+                    <select class="form-control" [(ngModel)]="selectedItem">
+                        <option selected disabled>Choose Book</option>
+                        <option *ngFor="let item of result.detailItems" [value]="item.id"
+                            [selected]="item.id === selectedItem">{{item.book.title}}</option>
+                    </select>
+                </div>
+                <div class="col-sm-1">
+                    <button type="button" class="btn btn-outline-primary" (click)="addCartItem()">Add</button>
+                </div>
+            </div>
+            <table class="table table-hover table-responsive my-5 py-3 container justify-content-center"
+                *ngIf="carts.length > 0">
+                <thead>
+                    <tr>
+                        <th scope="col">No.</th>
+                        <th scope="col">Title</th>
+                        <th scope="col">ISBN</th>
+                        <th scope="col">Rental Cost</th>
+                        <th scope="col">Rental Date</th>
+                        <th scope="col">Return Date</th>
+                        <th scope="col">Total Cost</th>
+
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody *ngFor="let cart of carts; index as i;">
+                    <tr class="">
+                        <th scope="row">{{i+1}}</th>
+                        <td>{{cart.book.title}}</td>
+                        <td>{{cart.book.isbn}}</td>
+                        <td>{{cart.book.rentalCost | currency:"IDR":"symbol":"4.2-2"}}</td>
+                        <td>{{cart.rentalDate | date:"d MMMM y (h:mm:ss a)"}}</td>
+                        <td>{{cart.returnDate | date:"d MMMM y (h:mm:ss a)"}}</td>
+                        <td>{{cart.totalCost | currency:"IDR":"symbol"}}</td>
+                        <td>
+                            <button type="button" class="btn btn-outline-primary" (click)="removeCartItem(i)">
+                                <i class="fal fa-trash-alt fa-lg"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="button" class="btn btn-primary float-right" (click)="submitTransaction()"
+                *ngIf="carts.length > 0">Submit</button>
+        </div>
+    </div>
+</article>

@@ -3,17 +3,19 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { TransactionRoutingModule } from './transaction-routing.module';
-import { AddTransactionComponent } from 'src/app/page/add-transaction/add-transaction.component';
-import { TransactionComponent } from 'src/app/page/transaction/transaction.component';
-import { DetailTransactionComponent } from 'src/app/page/detail-transaction/detail-transaction.component';
-import { ReturnTransactionComponent } from '../../page/return-transaction/return-transaction.component';
+import { TransactionRentalComponent } from 'src/app/page/transaction-rental/transaction-rental.component';
+import { TransactionReturnComponent } from '../../page/transaction-return/transaction-return.component';
+import { TransactionReturnAddComponent } from '../../page/transaction-return-add/transaction-return-add.component';
+import { TransactionRentalAddComponent } from 'src/app/page/transaction-rental-add/transaction-rental-add.component';
+import { TransactionRentalDetailComponent } from 'src/app/page/transaction-rental-detail/transaction-rental-detail.component';
 
 @NgModule({
   declarations: [
-    TransactionComponent,
-    DetailTransactionComponent,
-    AddTransactionComponent,
-    ReturnTransactionComponent,
+    TransactionRentalComponent,
+    TransactionRentalDetailComponent,
+    TransactionRentalAddComponent,
+    TransactionReturnComponent,
+    TransactionReturnAddComponent,
   ],
   imports: [CommonModule, TransactionRoutingModule, FormsModule],
 })

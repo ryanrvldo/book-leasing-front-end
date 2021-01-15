@@ -1,0 +1,37 @@
+<div class="row no-gutters">
+    <div class="col">
+        <h2>Return</h2>
+    </div>
+    <div class="col" *ngIf="user && user.role && user.role.code === 'CSHR'">
+        <button type="button" class="btn btn-primary float-right" routerLink="/return/add">
+            <i class="fal fa-plus-circle"></i>
+            Add
+        </button>
+    </div>
+</div>
+<table class="table table-hover table-responsive my-3">
+    <thead>
+        <tr>
+            <th scope="col">No.</th>
+            <th scope="col">Invoice</th>
+            <th scope="col">Customer Name</th>
+            <th scope="col">Book Title</th>
+            <th scope="col">Book ISBN</th>
+            <th scope="col">Returned Date</th>
+            <th scope="col">Total Cost</th>
+            <th scope="col">Cashier Username</th>
+        </tr>
+    </thead>
+    <tbody *ngFor="let return of returns; index as i;">
+        <tr>
+            <th scope="row">{{i+1}}</th>
+            <td>{{return.rentalDetail.rentalHeader.receipt}}</td>
+            <td>{{return.rentalDetail.rentalHeader.customer.profile.fullName}}</td>
+            <td>{{return.rentalDetail.inventory.book.title}}</td>
+            <td>{{return.rentalDetail.inventory.book.isbn}}</td>
+            <td>{{return.returnedDate | date:"d MMMM y (h:mm:ss a)"}}</td>
+            <td>{{return.totalPrice | currency:"IDR":"symbol"}}</td>
+            <td>{{return.user.username}}</td>
+        </tr>
+    </tbody>
+</table>
